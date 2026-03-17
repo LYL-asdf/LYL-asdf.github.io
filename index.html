@@ -1,10 +1,321 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yilin - Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Section Common Styles */
+        section {
+            padding: 100px 5% 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        h2.section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* Hero Section */
+        #home {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h3 {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Research & Skills Section */
+        #research .content-wrapper {
+            display: flex;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-box {
+            flex: 1;
+        }
+
+        .text-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background-color: #e9ecef;
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #research .content-wrapper {
+                flex-direction: column;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            nav ul {
+                display: none; 
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello World !!!</h1>
-  <p>This is my GitHub Pages site</p>
+
+    <header>
+        <div class="logo">Yilin</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Yilin</h1>
+            <h3>PhD Student</h3>
+            <p style="max-width: 600px; margin: 0 auto 2rem; color: #555;">
+                Focusing on AI-based surrogate models and digital twins for cardiac electrophysiology and mechanics.
+            </p>
+            <a href="#projects" class="btn">View Projects</a>
+        </div>
+    </section>
+
+    <section id="research">
+        <h2 class="section-title">Research & Expertise</h2>
+        <div class="content-wrapper">
+            <div class="text-box">
+                <p>My research primarily focuses on developing AI-based surrogate models and digital twin systems for cardiac electrophysiology and mechanics.</p>
+                <p>By combining deep learning architectures (such as GCN, LSTM, and Mamba) with high-performance computing, I explore the application of multi-task learning in predicting myocardial infarction scars and their transmurality, as well as solving cardiac inverse problems.</p>
+                <div class="skills">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">Medical Imaging (VTK, NIfTI)</span>
+                    <span class="skill-tag">Cardiac Simulation</span>
+                    <span class="skill-tag">High-Performance Computing</span>
+                    <span class="skill-tag">Mamba Architecture</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background-color: #fdfbfb;">
+        <h2 class="section-title">Recent Work</h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h3>MAPS-Net</h3>
+                <p>Multi-Task Surrogate Modeling for Cardiac Inverse Optimization. Developing surrogate models to accelerate cardiac electrophysiology simulations and predict ECG and VM fields.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-file-waveform"></i>
+                </div>
+                <h3>MICCAI 2026 Submission</h3>
+                <p>Preparation of an academic research paper and experimental validation focusing on surrogate models for cardiac inverse problems.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-cubes"></i>
+                </div>
+                <h3>3D Medical Mesh Processing</h3>
+                <p>Utilizing PyVista and VTK for Left Ventricular (LV) volume calculation, myocardial infarction scar mapping, and generating academic visualizations.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="social-links">
+            <a href="https://github.com/YourGitHubUsername" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:YourEmailAddress" title="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 Yilin. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
